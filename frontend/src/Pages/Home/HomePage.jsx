@@ -3,12 +3,12 @@ import HeroImg from "@/assets/HeroImg.png";
 
 function HomePage() {
   return (
-    <div className=" min-h-[90vh] flex items-center gap-6">
+    <div className="flex-col md:flex-row min-h-[90vh] flex items-center mb-12 md:gap-6">
       <div>
-        <img className=" p-14" src={HeroImg} alt="image" />
+        <img className=" p-7 md:p-14" src={HeroImg} alt="image" />
       </div>
-      <div className=" w-6/12">
-        <h1 className=" text-5xl font-bold">
+      <div className=" md:w-6/12">
+        <h1 className=" text-2xl md:text-5xl font-bold">
           <span className=" text-[#102C57]">Pathology Lab</span> Management
           System
         </h1>

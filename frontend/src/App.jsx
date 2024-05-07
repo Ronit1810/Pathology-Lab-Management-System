@@ -8,9 +8,9 @@ import TestDetail from './Pages/Home/TestDetail'
 function App() {
 
   return (
-    <div className=' bg-[#f8f5f2e7] min-h-screen px-16 py-8'>
+    <div className=' bg-[#f8f5f2e7] min-h-screen '>
       <Navbar />
-      <div className=' px-24'>
+      <div className=' px-7 md:px-24'>
         <HomePage />
         <TestDetail />
       </div>
