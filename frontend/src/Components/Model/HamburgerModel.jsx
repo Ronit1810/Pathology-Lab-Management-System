@@ -1,7 +1,7 @@
 // import React from 'react'
 
 // eslint-disable-next-line react/prop-types
-const HamburgerModel = ({ setIsOpen, setMenuOpen }) => {
+const HamburgerModel = ({ setIsOpen, setMenuOpen, setTestMenu}) => {
   return (
     <div className=" flex justify-end w-full h-full fixed top-0 left-0 bg-[rgba(199,199,199,0.5)]">
         <div className=" rounded-md w-64 h-1/2 bg-white">
@@ -18,7 +18,7 @@ const HamburgerModel = ({ setIsOpen, setMenuOpen }) => {
               Report
             </h1>
 
-            <h1 className=" border-[2px] border-[#102C57] px-8 py-1 rounded-md justify-center hover:bg-[#102C57] hover:text-white cursor-pointer font-semibold">
+            <h1 className=" border-[2px] border-[#102C57] px-8 py-1 rounded-md justify-center hover:bg-[#102C57] hover:text-white cursor-pointer font-semibold" onClick={() => {setTestMenu(prev=>!prev); setMenuOpen(prev=>!prev)}}>
               Add Test
             </h1>
 
