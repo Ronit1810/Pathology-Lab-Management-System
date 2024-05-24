@@ -5,6 +5,7 @@ import menu from "../../assets/menu.png";
 import Model from "../Model/CreateNewModel";
 import HamburgerModel from "../Model/HamburgerModel";
 import AddTestModel from "../Model/AddTestModel";
+import { Link } from "react-router-dom";
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -12,9 +13,9 @@ function Navbar() {
   const [testMenu, setTestMenu] = useState(false)
   return (
     <div className=" bg-[#EADBC8] h-20 border-b-[1px] px-10 md:px-20 flex items-center justify-between">
-      <div className="">
+      <Link to='/' className="">
         <img className=" w-20 h-12" src={Logo} alt="Logo image" />
-      </div>
+      </Link>
 
       <div className=" hidden md:flex gap-10 pr-16 font-normal text-gray-500">
         <h1
@@ -26,9 +27,9 @@ function Navbar() {
           Create New
         </h1>
 
-        <h1 className=" hover:text-[#102C57] cursor-pointer font-semibold">
+        <Link to='/status' className=" hover:text-[#102C57] cursor-pointer font-semibold">
           Report
-        </h1>
+        </Link>
 
         <h1 className=" hover:text-[#102C57] cursor-pointer font-semibold" onClick={()=> {setTestMenu(prev => !prev)}}>
           Add Test

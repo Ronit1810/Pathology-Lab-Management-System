@@ -9,42 +9,54 @@ const Model = ( {setIsOpen} ) => {
               <div className=" text-2xl text-[#102C57] font-semibold">Create New</div>
               <div className=" cursor-pointer text-2xl font-bold" onClick={() => {setIsOpen(prev=>!prev)}}>X</div>
             </div>
-            <div className=" flex p-5 ">
-              <form className=" flex flex-col gap-2 justify-center items-center">
-                <div className=" md:mb-10 items-center justify-between flex flex-col md:flex-row gap-1 md:gap-3">
-                  <label>Name</label>
-                  <input className=" outline-none border-[2px] rounded-md border-[#102C57] px-4 h-7 w-72" type="text" required placeholder="Enter Name of the Patient" />
-                  <label>Mobile</label>
-                  <input className="outline-none border-[2px] rounded-md border-[#102C57] px-4 h-7 w-72" type="number" required placeholder="Enter Mobile No. of Patient" />
-                </div> 
+            <div className="p-5 ">
 
-                <div className=" md:mb-10 items-center justify-between flex flex-col md:flex-row gap-1 md:gap-3">
-                  <label>Address</label>
-                  <input className=" outline-none border-[2px] rounded-md border-[#102C57] px-4 h-7 w-72" type="text" required placeholder="Enter Adderss of the Patient" />
-                  <label>Age</label>
-                  <input className="outline-none border-[2px] rounded-md border-[#102C57] px-4 h-7 w-72" type="number" required placeholder="Enter Age of Patient" />
+              <form className=" flex justify-center flex-wrap gap-1 md:gap-5">
+              <div className="">
+                  <label htmlFor="">Name</label><br />
+                  <input type="text" className=" outline-none border-[2px] rounded-md border-[#102C57] px-4 h-7 md:py-4 w-72" />
                 </div>
 
-                <div className=" md:mb-10 items-center justify-between flex flex-col md:flex-row gap-1 md:gap-3">
-                  <label>Examined By</label>
-                  <input className=" outline-none border-[2px] rounded-md border-[#102C57] px-4 h-7 w-72" type="text" required placeholder="Examined Doctor " />
-                  <label>Examined Date</label>
-                  <input className="outline-none border-[2px] rounded-md border-[#102C57] px-4 h-7 w-72" type="date" required placeholder="Enter Age of Patient" />
+                <div className="">
+                  <label htmlFor="">Mobile No.</label><br />
+                  <input type="number" className=" outline-none border-[2px] rounded-md border-[#102C57] px-4 h-7 md:py-4 w-72" />
                 </div>
 
-                <div className="md:mb-10 items-center justify-between flex flex-col md:flex-row gap-1 md:gap-3">
-                  <label>Setect Test</label>
-                  {/* <input className=" outline-none border-[2px] rounded-md border-[#102C57] px-4 h-7 w-72" type="text" required placeholder="Examined Doctor " /> */}
-                  <select className="outline-none border-[2px] rounded-md border-[#102C57] px-4 h-7 w-72" >
+                <div className="">
+                  <label htmlFor="">Adderss</label><br />
+                  <input type="text" className=" outline-none border-[2px] rounded-md border-[#102C57] px-4 h-7 md:py-4 w-72" />
+                </div>
+
+                <div className="">
+                  <label htmlFor="">Age</label><br />
+                  <input type="number" className=" outline-none border-[2px] rounded-md border-[#102C57] px-4 h-7 md:py-4 w-72" />
+                </div>
+
+                <div className="">
+                  <label htmlFor="">Examined By</label><br />
+                  <input type="text" className=" outline-none border-[2px] rounded-md border-[#102C57] px-4 h-7 md:py-4 w-72" />
+                </div>
+
+                <div className="">
+                  <label htmlFor="">Examined Date</label><br />
+                  <input type="date" className=" outline-none border-[2px] rounded-md border-[#102C57] px-4 h-7 md:py-4 w-72" />
+                </div>
+
+                <div className="">
+                  <label htmlFor="">Select Test</label><br />
+                  <select className="outline-none border-[2px] rounded-md border-[#102C57] px-4 h-7 md:h-9 w-72">
                     <option>A</option>
                     <option>B</option>
                     <option>C</option>
                   </select>
-                  <label>Report Date</label>
-                  <input className="outline-none border-[2px] rounded-md border-[#102C57] px-4 h-7 w-72" type="date" required placeholder="Enter Age of Patient" />
                 </div>
 
-                <button className=" w-28 items-center border-[2px] border-[#102C57] rounded-lg px-5 py-2 hover:text-white hover:bg-[#102C57]" type="submit">Submit</button>
+                <div className="">
+                  <label htmlFor="">Report Date</label><br />
+                  <input type="date" className=" outline-none border-[2px] rounded-md border-[#102C57] px-4 h-7 md:py-4 w-72" />
+                </div> 
+
+                <button className=" m-5 w-28 items-center border-[2px] border-[#102C57] rounded-lg px-5 py-2 hover:text-white hover:bg-[#102C57]" type="submit">Submit</button>
                 
               </form>
             </div>

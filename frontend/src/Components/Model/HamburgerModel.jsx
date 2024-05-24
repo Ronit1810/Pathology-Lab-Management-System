@@ -1,5 +1,7 @@
 // import React from 'react'
 
+import { Link } from "react-router-dom";
+
 // eslint-disable-next-line react/prop-types
 const HamburgerModel = ({ setIsOpen, setMenuOpen, setTestMenu}) => {
   return (
@@ -14,9 +16,9 @@ const HamburgerModel = ({ setIsOpen, setMenuOpen, setTestMenu}) => {
               Create New
             </h1>
 
-            <h1 className=" border-[2px] border-[#102C57] px-8 py-1 rounded-md justify-center hover:bg-[#102C57] hover:text-white cursor-pointer font-semibold">
+            <Link to='/status' onClick={()=>{setMenuOpen(prev=>!prev)}} className=" border-[2px] border-[#102C57] px-8 py-1 rounded-md justify-center hover:bg-[#102C57] hover:text-white cursor-pointer font-semibold">
               Report
-            </h1>
+            </Link>
 
             <h1 className=" border-[2px] border-[#102C57] px-8 py-1 rounded-md justify-center hover:bg-[#102C57] hover:text-white cursor-pointer font-semibold" onClick={() => {setTestMenu(prev=>!prev); setMenuOpen(prev=>!prev)}}>
               Add Test
