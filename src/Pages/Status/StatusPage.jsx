@@ -1,5 +1,7 @@
 // import React from 'react'
 import EditNoteIcon from '@mui/icons-material/EditNote';
+import DeleteIcon from '@mui/icons-material/Delete';
+import SummarizeIcon from '@mui/icons-material/Summarize';
 
 import { useState } from "react"
 
@@ -23,8 +25,10 @@ function StatusPage() {
               <div>Dr.R.B.Patel</div>
               <div className=' text-gray-500 text-xs'>08-05-2024</div>
             </div>
-            <div>
+            <div className=' flex items-center justify-center gap-2 md:gap-4 ' >
               <EditNoteIcon className=' cursor-pointer bg-[#102C57] text-white rounded-md' />
+              <DeleteIcon className=' cursor-pointer bg-[#102C57] text-white rounded-md' />
+              <SummarizeIcon className=' cursor-pointer bg-[#102C57] text-white rounded-md' />
             </div>
           </div>
 
@@ -34,8 +38,10 @@ function StatusPage() {
               <div>Dr.R.B.Patel</div>
               <div className=' text-gray-500 text-xs'>08-05-2024</div>
             </div>
-            <div>
+            <div className=' flex items-center justify-center gap-2 md:gap-4 '>
               <EditNoteIcon className=' cursor-pointer bg-[#102C57] text-white rounded-md' />
+              <DeleteIcon className=' cursor-pointer bg-[#102C57] text-white rounded-md' />
+              <SummarizeIcon className=' cursor-pointer bg-[#102C57] text-white rounded-md' />
             </div>
           </div>
           
@@ -45,8 +51,10 @@ function StatusPage() {
               <div>Dr.R.B.Patel</div>
               <div className=' text-gray-500 text-xs'>08-05-2024</div>
             </div>
-            <div>
+            <div className=' flex items-center justify-center gap-2 md:gap-4 '>
               <EditNoteIcon className=' cursor-pointer bg-[#102C57] text-white rounded-md' />
+              <DeleteIcon className=' cursor-pointer bg-[#102C57] text-white rounded-md' />
+              <SummarizeIcon className=' cursor-pointer bg-[#102C57] text-white rounded-md' />
             </div>
           </div>
         </div>
