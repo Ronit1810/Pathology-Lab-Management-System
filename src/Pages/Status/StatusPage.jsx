@@ -3,10 +3,50 @@ import EditNoteIcon from '@mui/icons-material/EditNote';
 import DeleteIcon from '@mui/icons-material/Delete';
 import SummarizeIcon from '@mui/icons-material/Summarize';
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 function StatusPage() {
+
+  const pendingData = [
+    {
+      "id":"1",
+      "name":"Ronit",
+      "drname":"Dr.R.B.Patel",
+      "predate":"09-06-2001"
+    },
+    {
+      "id":"2",
+      "name":"Devgun",
+      "drname":"Dr.Yadav",
+      "predate":"09-10-2011"
+    }
+  ]
+  const completeData = [
+    {
+      "id":"1",
+      "name":"Rahul",
+      "drname":"Dr.Patel",
+      "predate":"25-06-2001"
+    },
+    {
+      "id":"2",
+      "name":"Devgun",
+      "drname":"Dr.dev",
+      "predate":"09-10-2025"
+    }
+  ]
+
   const[activeStatus, setActiveStatus] = useState('pending')
+  const[data, setData] = useState([])
+  useEffect(()=>{
+    if (activeStatus === 'pending') {
+      setData(pendingData)
+      // console.log(data);
+    } else {
+      setData(completeData)
+      // console.log(data);
+    }
+  },[activeStatus])
   return (
     <div className='min-h-[70vh]'>
       <div className=" flex flex-col gap-5 items-center justify-center">
@@ -19,44 +59,26 @@ function StatusPage() {
 
       {/* List of Pending or Completed Test */}
         <div className=" items-center w-full flex gap-6 flex-col justify-center">
-          <div className=" p-2 md:px-16 md:py-2 flex justify-between h-fit w-full rounded-lg items-center md:w-[90%] border-[2px] border-black">
-            <div className=' text-[#102C57]'>Mr.Ronit Patel</div>
-            <div>
-              <div>Dr.R.B.Patel</div>
-              <div className=' text-gray-500 text-xs'>08-05-2024</div>
-            </div>
-            <div className=' flex items-center justify-center gap-2 md:gap-4 ' >
-              <EditNoteIcon className=' cursor-pointer bg-[#102C57] text-white rounded-md' />
-              <DeleteIcon className=' cursor-pointer bg-[#102C57] text-white rounded-md' />
-              <SummarizeIcon className=' cursor-pointer bg-[#102C57] text-white rounded-md' />
-            </div>
-          </div>
+          {
+            data && data.map((item, index)=>{
+              return(
+                <div key={index} className=" p-2 md:px-16 md:py-2 flex justify-evenly h-fit w-full rounded-lg items-center md:w-[90%] border-[2px] border-black">
+                  <div className=' text-[#102C57]'>{item.name}</div>
+                  <div className=' flex flex-col items-center justify-center'>
+                    <div>{item.drname}</div>
+                    <div className=' text-gray-500 text-xs'>{item.predate}</div>
+                  </div>
+                  <div className=' flex items-center justify-center gap-2 md:gap-4 ' >
+                    {activeStatus === 'pending'?<EditNoteIcon className=' cursor-pointer bg-[#102C57] text-white rounded-md' />:null}
+                    {activeStatus === 'pending'?<DeleteIcon className=' cursor-pointer bg-[#102C57] text-white rounded-md' />:null}
+                    <SummarizeIcon className=' cursor-pointer bg-[#102C57] text-white rounded-md' />
+                  </div>
+                </div>
+              )
+            })
+          }
 
-          <div className=" p-2 md:px-16 md:py-2 flex justify-between h-fit w-full rounded-lg items-center md:w-[90%] border-[2px] border-black">
-            <div className=' text-[#102C57]'>Mr.Ronit Patel</div>
-            <div>
-              <div>Dr.R.B.Patel</div>
-              <div className=' text-gray-500 text-xs'>08-05-2024</div>
-            </div>
-            <div className=' flex items-center justify-center gap-2 md:gap-4 '>
-              <EditNoteIcon className=' cursor-pointer bg-[#102C57] text-white rounded-md' />
-              <DeleteIcon className=' cursor-pointer bg-[#102C57] text-white rounded-md' />
-              <SummarizeIcon className=' cursor-pointer bg-[#102C57] text-white rounded-md' />
-            </div>
-          </div>
           
-          <div className=" p-2 md:px-16 md:py-2 flex justify-between h-fit w-full rounded-lg items-center md:w-[90%] border-[2px] border-black">
-            <div className=' text-[#102C57]'>Mr.Ronit Patel</div>
-            <div>
-              <div>Dr.R.B.Patel</div>
-              <div className=' text-gray-500 text-xs'>08-05-2024</div>
-            </div>
-            <div className=' flex items-center justify-center gap-2 md:gap-4 '>
-              <EditNoteIcon className=' cursor-pointer bg-[#102C57] text-white rounded-md' />
-              <DeleteIcon className=' cursor-pointer bg-[#102C57] text-white rounded-md' />
-              <SummarizeIcon className=' cursor-pointer bg-[#102C57] text-white rounded-md' />
-            </div>
-          </div>
         </div>
       </div>
     </div>
