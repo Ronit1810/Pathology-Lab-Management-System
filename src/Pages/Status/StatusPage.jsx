@@ -4,6 +4,8 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import SummarizeIcon from '@mui/icons-material/Summarize';
 
 import { useEffect, useState } from "react"
+import Model from '../../Components/Model/CreateNewModel';
+import { Link } from 'react-router-dom';
 
 function StatusPage() {
 
@@ -38,6 +40,17 @@ function StatusPage() {
 
   const[activeStatus, setActiveStatus] = useState('pending')
   const[data, setData] = useState([])
+  const[isClick, setIsClick] = useState(false)
+  const[clickedPatient, setClickedPatent] = useState(null)
+
+  const updateIconClick = (item) => {
+    return(
+      setIsClick(true),
+      setClickedPatent(item)
+    )
+  }
+
+
   useEffect(()=>{
     if (activeStatus === 'pending') {
       setData(pendingData)
@@ -48,7 +61,7 @@ function StatusPage() {
     }
   },[activeStatus])
   return (
-    <div className='min-h-[70vh]'>
+    <div className='min-h-[70vh] md:min-h-[75vh]'>
       <div className=" flex flex-col gap-5 items-center justify-center">
 
       {/* status (Pending or Completed) */}
@@ -69,17 +82,20 @@ function StatusPage() {
                     <div className=' text-gray-500 text-xs'>{item.predate}</div>
                   </div>
                   <div className=' flex items-center justify-center gap-2 md:gap-4 ' >
-                    {activeStatus === 'pending'?<EditNoteIcon className=' cursor-pointer bg-[#102C57] text-white rounded-md' />:null}
+                    {activeStatus === 'pending'?<EditNoteIcon onClick={()=>{updateIconClick(item)}} className=' cursor-pointer bg-[#102C57] text-white rounded-md' />:null}
                     {activeStatus === 'pending'?<DeleteIcon className=' cursor-pointer bg-[#102C57] text-white rounded-md' />:null}
-                    <SummarizeIcon className=' cursor-pointer bg-[#102C57] text-white rounded-md' />
+                    <Link to={`/report/${item.id}`} className=' cursor-pointer bg-[#102C57] flex items-center text-white rounded-md'><SummarizeIcon  /></Link>
+                    
                   </div>
                 </div>
               )
             })
           }
 
-          
         </div>
+        {
+          isClick && <Model item={clickedPatient} setIsOpen={setIsClick} />
+        }
       </div>
     </div>
   )

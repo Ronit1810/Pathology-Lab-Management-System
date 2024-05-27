@@ -6,6 +6,7 @@ import HomePage from './Pages/Home/HomePage'
 // import TestDetail from './Pages/Home/TestDetail'
 import { Routes, Route } from 'react-router-dom'
 import StatusPage from './Pages/Status/StatusPage'
+import Report from './Pages/Report/Report'
 
 function App() {
 
@@ -15,8 +16,9 @@ function App() {
       
       <div className=' px-7 md:px-24'>
       <Routes>
-        <Route path='/' element= <HomePage /> />
-        <Route path='/status' element=<StatusPage/> />
+        <Route path='/' element= {<HomePage />} />
+        <Route path='/status' element={<StatusPage/>} />
+        <Route path='/report/:id' element={<Report />} />
       </Routes>
       </div>
       
