@@ -6,6 +6,7 @@ import HomePage from "./Pages/Home/HomePage";
 import { Routes, Route } from "react-router-dom";
 import StatusPage from "./Pages/Status/StatusPage";
 import Report from "./Pages/Report/Report";
+import Prescription from "./Pages/Prescription/Prescription";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/status" element={<StatusPage />} />
           <Route path="/report/:id" element={<Report />} />
+          <Route path="/prescription/:id" element={<Prescription />} />
         </Routes>
       </div>
 
