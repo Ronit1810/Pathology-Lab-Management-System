@@ -5,9 +5,11 @@ import menu from "../../assets/menu.png";
 import Model from "../Model/CreateNewModel";
 import HamburgerModel from "../Model/HamburgerModel";
 import AddTestModel from "../Model/AddTestModel";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Navbar() {
+
+  const Navigate = useNavigate()
   const [isOpen, setIsOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [testMenu, setTestMenu] = useState(false)
@@ -27,9 +29,9 @@ function Navbar() {
           Create New
         </h1>
 
-        <Link to='/status' className=" hover:text-[#102C57] cursor-pointer font-semibold">
+        <div onClick={() => Navigate("/status")}  className=" hover:text-[#102C57] cursor-pointer font-semibold">
           Report
-        </Link>
+        </div>
 
         <h1 className=" hover:text-[#102C57] cursor-pointer font-semibold" onClick={()=> {setTestMenu(prev => !prev)}}>
           Add Test

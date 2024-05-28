@@ -9,6 +9,8 @@ import { Link } from 'react-router-dom';
 
 function StatusPage() {
 
+  
+
   const pendingData = [
     {
       "id":"1",
