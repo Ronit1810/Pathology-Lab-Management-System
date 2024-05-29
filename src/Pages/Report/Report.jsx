@@ -1,8 +1,12 @@
 // import React from 'react'
 
 import { useState } from "react"
+import { Link, useParams } from "react-router-dom"
 
 const Report = () => {
+
+    // useParams() is use to fetch/take the data from url(current)
+    const {id} = useParams()
 
     const[inputField, setInputField] = useState([{"id":0, "name":"", "range":"", "unit":"", "result":""}])
 
@@ -94,7 +98,7 @@ const Report = () => {
                     inputField.length > 1 ? <div onClick={RemoveRow} className=" border-[2px] border-[#102C57] px-4 py-1 rounded-2xl mt-4 cursor-pointer hover:bg-[#102C57] hover:text-white">Remove</div> : null
                 }
 
-                <div className=" border-[2px] border-[#102C57] px-4 py-1 rounded-2xl mt-4 cursor-pointer hover:bg-[#102C57] hover:text-white">Report</div>
+                <Link to={`/prescription/${id}`} className=" border-[2px] border-[#102C57] px-4 py-1 rounded-2xl mt-4 cursor-pointer hover:bg-[#102C57] hover:text-white">Report</Link>
             </div>
             
         </div>
