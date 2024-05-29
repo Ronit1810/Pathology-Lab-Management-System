@@ -1,11 +1,43 @@
 import React from 'react'
 
 import logo from '../../assets/Logo.png'
+import html2canvas from 'html2canvas'
+import jsPDF from 'jspdf'
 
 const Prescription = () => {
+
+
+    // download report functionality
+    const downloadPDF = () => {
+        const input = document.getElementById("PDFPage")
+
+        // html2canvas return promise
+        html2canvas(input).then((canvas) => {
+            const imgData = canvas.toDataURL('image/png')
+            const pdf = new jsPDF('p', 'mm', 'a4') //jsPDF p(portrait)
+            const imgWidth = 210; // A4 width in mm
+            const imgHeight = (canvas.height * imgWidth) / canvas.width; 
+            const pageHeight = pdf.internal.pageSize.getHeight();
+            let heightLeft = imgHeight;
+
+            let position = 0;
+
+            pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight)
+            heightLeft -= pageHeight;
+
+            while (heightLeft >= 0) {
+                position = heightLeft - imgHeight;
+                pdf.addPage();
+                pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+                heightLeft -= pageHeight;
+            }
+            pdf.save("name.pdf")
+        })
+    }
+
   return (
     <div className=" min-h-[70vh] md:min-h-[75vh] flex flex-col items-center gap-5">
-        <div className=" mt-10 p-5 rounded-lg w-full  bg-[rgba(222,221,219,0.5)] ">
+        <div id='PDFPage' className=" pb-10 px-5 mt-10 rounded-lg w-full  bg-[rgba(222,221,219,0.5)] ">
 
             {/* header of prescription logo and detail */}
             <div className='md:px-8 my-4 flex items-center justify-between'>
@@ -52,7 +84,7 @@ const Prescription = () => {
                             <td className=' pb-2 md:pb-4 text-xs md:text-base'>145</td>
                             <td className=' pb-2 md:pb-4 text-xs md:text-base'>ml</td>
                             <td className=' pb-2 md:pb-4 text-xs md:text-base'>140</td>
-                        </tr>
+                        </tr>                        
                     </tbody>
                 </table>
             </div>
@@ -73,7 +105,7 @@ const Prescription = () => {
         </div>
 
         {/* Download Button */}
-        <div className=' flex rounded-3xl bg-[#102C57] text-white hover:bg-white hover:text-black justify-center w-40 px-4 py-2 border-[2px] border-black'>Download</div>
+        <div onClick={downloadPDF} className=' cursor-pointer flex rounded-3xl bg-[#102C57] text-white hover:bg-white hover:text-black justify-center w-40 px-4 py-2 border-[2px] border-black'>Download</div>
     </div>
   )
 }
