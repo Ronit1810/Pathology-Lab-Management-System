@@ -1,4 +1,4 @@
-import React from 'react'
+// import React from 'react'
 
 import logo from '../../assets/Logo.png'
 import html2canvas from 'html2canvas'
