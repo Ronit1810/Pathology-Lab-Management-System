@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 const mongoose = require('mongoose')
 
 const schema = new mongoose.Schema({
@@ -11,7 +12,7 @@ const schema = new mongoose.Schema({
     },
     TestImageLink:{
         type:String,
-        default:"https://www.freeiconspng.com/thumbs/no-image-icon/no-image-icon-15.png"
+        default:"https://t4.ftcdn.net/jpg/04/00/24/31/360_F_400243185_BOxON3h9avMUX10RsDkt3pJ8iQx72kS3.jpg"
     },
     Price:{
         type:Number,
@@ -40,4 +41,4 @@ const schema = new mongoose.Schema({
 })
 
 const repo = mongoose.model('test',schema)
-module.exports = {repo}
+module.exports = repo
