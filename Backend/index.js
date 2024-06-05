@@ -3,7 +3,9 @@ const express = require('express');
 const dotenv = require('dotenv') // use to read .env file
 const bodyParser = require('body-parser');
 const {connection} = require('./config/connection.js');
-const { route } = require('./routes/testRoutes.js');
+const  testRoute  = require('./routes/testRoutes.js');
+const  patientRoute  = require('./routes/patientRoute.js')
+const cors = require('cors')
 
 
 //configuration for .env file
@@ -17,9 +19,14 @@ const app = express();
 
 
 //middleware
-app.use(bodyParser.json())
+app.use(bodyParser.json());
+app.use(cors());
 
-app.use('/test',route)
+// console.log('Test Routes:', testRoute);  // Add this line
+// console.log('Patient Routes:', patientRoute);  
+
+app.use('/test',testRoute);
+app.use('/patient',patientRoute)
 
 // port (eg: localhost:8000)
 const PORT = process.env.PORT || 8000;

@@ -1,5 +1,6 @@
 // import React from 'react'
 
+import axios from "axios"
 import { useState } from "react"
 
 // eslint-disable-next-line react/prop-types
@@ -11,7 +12,17 @@ const AddTestModel = ({setTestMenu}) => {
     e.preventDefault()
     setTestInput({...testInput,[e.target.name]:e.target.value})
   }
-  console.log(testInput);
+  // console.log(testInput);
+
+  const handleSubmit = async () => {
+    try {
+      const response = await axios.post('http://localhost:8080/test/post',testInput)
+      console.log(response);
+      window.location.reload()
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   return (
     <div className=" flex justify-center items-center w-full h-full fixed top-0 left-0 bg-[rgba(168,169,168,0.5)]">
@@ -68,7 +79,7 @@ const AddTestModel = ({setTestMenu}) => {
                   <input type="date" name="Date" value={testInput.Date} onChange={(e)=>{handleTestInput(e)}} className=" outline-none border-[2px] rounded-md border-[#102C57] px-4 h-7 md:py-4 w-72" />
                 </div>
 
-                <button className=" mt-3 md:mt-2 w-28 items-center border-[2px] border-[#102C57] rounded-lg px-5 py-2 hover:text-white hover:bg-[#102C57]" type="submit">Submit</button>
+                <button onClick={handleSubmit} className=" mt-3 md:mt-2 w-28 items-center border-[2px] border-[#102C57] rounded-lg px-5 py-2 hover:text-white hover:bg-[#102C57]" type="submit">Submit</button>
                 
               </form>
             </div>

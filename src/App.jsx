@@ -8,7 +8,11 @@ import StatusPage from "./Pages/Status/StatusPage";
 import Report from "./Pages/Report/Report";
 import Prescription from "./Pages/Prescription/Prescription";
 
+
 function App() {
+
+  
+
   return (
     <div className=" bg-[#f8f5f2e7] min-h-screen ">
       <Navbar />

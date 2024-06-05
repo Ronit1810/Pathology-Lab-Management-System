@@ -1,11 +1,31 @@
 // import React from 'react'
 
+import axios from 'axios'
 import logo from '../../assets/Logo.png'
 import html2canvas from 'html2canvas'
 import jsPDF from 'jspdf'
+import { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
 
 const Prescription = () => {
 
+    const{id} = useParams()
+    const[patientDetail, setPatientDetail] = useState(null)
+
+    const loadPatient = async () => {
+        try {
+            const response = await axios.get(`http://localhost:8080/patient/get/${id}`)
+            console.log(response);
+            setPatientDetail(response.data.data)
+            console.log(patientDetail);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    useEffect(() => {
+        loadPatient();
+    },[id])
 
     // download report functionality
     const downloadPDF = () => {
@@ -31,7 +51,7 @@ const Prescription = () => {
                 pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
                 heightLeft -= pageHeight;
             }
-            pdf.save("name.pdf")
+            pdf.save(`${patientDetail?.Name}.pdf`)
         })
     }
 
@@ -55,39 +75,46 @@ const Prescription = () => {
             {/* patient detail */}
             <div className=' flex justify-between flex-col md:flex-row md:px-16 pb-8 border-b-[1px] border-black'>
                 <div className=' flex flex-col '>
-                    <h1><span className=' mr-2 text-base font-medium text-[#102C57]'>Patient Name :</span>Ronit patel</h1>
-                    <h1><span className=' mr-2 text-base font-medium text-[#102C57]'>Patient Age :</span>22</h1>
-                    <h1><span className=' mr-2 text-base font-medium text-[#102C57]'>Patient Address :</span>bhanegoan nagpur </h1>
+                    <h1><span className=' mr-2 text-base font-medium text-[#102C57]'>Patient Name :</span>{patientDetail?.Name}</h1>
+                    <h1><span className=' mr-2 text-base font-medium text-[#102C57]'>Patient Age :</span>{patientDetail?.Age}</h1>
+                    <h1><span className=' mr-2 text-base font-medium text-[#102C57]'>Patient Address :</span>{patientDetail?.Adderss}</h1>
                 </div>
                 <div className=' flex flex-col justify-between'>
-                    <h1><span className=' mr-2 text-base font-medium text-[#102C57]'>Examined by :</span>Dr.R.B.Patel</h1>
-                    <h1><span className=' mr-2 text-base font-medium text-[#102C57]'>Patient Mobile no. :</span>154786587</h1>
-                    <h1><span className=' mr-2 text-base font-medium text-[#102C57]'>Examined Date :</span>02-05-2025</h1>
+                    <h1><span className=' mr-2 text-base font-medium text-[#102C57]'>Examined by :</span>{patientDetail?.ExaminedBy}</h1>
+                    <h1><span className=' mr-2 text-base font-medium text-[#102C57]'>Patient Mobile no. :</span>{patientDetail?.Mobile}</h1>
+                    <h1><span className=' mr-2 text-base font-medium text-[#102C57]'>Examined Date :</span>{patientDetail?.ExaminedDate}</h1>
                 </div>               
             </div>
 
 
             {/* Test Detail */}
-            <div>
-                <table className=' w-full text-center my-16'>
-                    <thead className="">
-                        <tr>
-                            <th className=' text-sm'>Test Name</th>
-                            <th className=' text-sm'>Normal Range</th>
-                            <th className=' text-sm'>Unit</th>
-                            <th className=' text-sm'>Result</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td className=' pb-2 md:pb-4 text-[#102C57] text-xs md:text-base '>ronit</td>
-                            <td className=' pb-2 md:pb-4 text-xs md:text-base'>145</td>
-                            <td className=' pb-2 md:pb-4 text-xs md:text-base'>ml</td>
-                            <td className=' pb-2 md:pb-4 text-xs md:text-base'>140</td>
-                        </tr>                        
-                    </tbody>
-                </table>
-            </div>
+            {
+                patientDetail && patientDetail.result?.map((item,index) => {
+                    return(
+                        <div key={index}>
+                            <table className=' w-full text-center my-5'>
+                                <thead className="">
+                                    <tr>
+                                        <th className=' text-sm'>Test Name</th>
+                                        <th className=' text-sm'>Normal Range</th>
+                                        <th className=' text-sm'>Unit</th>
+                                        <th className=' text-sm'>Result</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td className=' pb-2 md:pb-4 text-[#102C57] text-xs md:text-base '>{item?.name}</td>
+                                        <td className=' pb-2 md:pb-4 text-xs md:text-base'>{item?.range}</td>
+                                        <td className=' pb-2 md:pb-4 text-xs md:text-base'>{item?.unit}</td>
+                                        <td className=' pb-2 md:pb-4 text-xs md:text-base'>{item?.result}</td>
+                                    </tr>                        
+                                </tbody>
+                            </table>
+                        </div>
+                    )
+                })
+            }
+            
 
 
             {/* Bottom Signature */}

@@ -1,17 +1,65 @@
+/* eslint-disable no-undef */
+/* eslint-disable react/prop-types */
 // import React from 'react'
 
-import { useState } from "react"
+import axios from "axios"
+import { useEffect, useState } from "react"
 
-// eslint-disable-next-line react/prop-types
+
 const Model = ( {setIsOpen, item} ) => {
 
-  const [input, setInput] = useState({"Name":"", "Mobile":"", "Adderss":"", "Age":"", "ExaminedBy":"", "ExaminedDate":"", "SelectTest":"", "ReportDate":""})
+  const [testList, setTestList] = useState([])
+  const [input, setInput] = useState({"Name":item?item.Name:"", "Mobile":item?item.Mobile:"", "Adderss":item?item.Adderss:"", "Age":item?item.Age:"", "ExaminedBy":item?item.ExaminedBy:"", "ExaminedDate":item?item.ExaminedDate:"", "SelectTest":item?item.SelectTest:"", "ReportDate":item?item.ReportDate:""})
+
+  console.log(item);
+  const handleOption = async () => {
+    try {
+      const response = await axios.get('http://localhost:8080/test/get');
+      const data = response.data.testData;
+      setTestList(data)
+      if (!item) {
+        setInput({...input,SelectTest:data[0]._id})
+      } else {
+        setInput({...input,SelectTest:SelectTest})
+      }
+      
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(() => {
+    handleOption()
+  },[])
+
 
   const handleInput = (e) => {
     e.preventDefault()
     setInput({...input,[e.target.name]:e.target.value})
   }
   console.log(input);
+
+  const handleSubmit = async() => {
+    if (!item) {
+      try {
+        const response = await axios.post('http://localhost:8080/patient/post',input)
+        console.log(response);
+        window.location.reload()
+      } catch (error) {
+        alert("incomplete form")
+        console.log(error);
+      }
+    } else {
+      try {
+        const response = await axios.put(`http://localhost:8080/patient/${item._id}`,input)
+        console.log(response);
+        window.location.reload()
+      } catch (error) {
+        alert("something went wrong in updating patient info.")
+        console.log(error);
+      }
+    }
+  }
 
   return (
     <div className=" flex justify-center fixed top-0 left-0 h-screen w-screen bg-[rgba(154,158,160,0.5)]">
@@ -55,10 +103,17 @@ const Model = ( {setIsOpen, item} ) => {
 
                 <div className="">
                   <label htmlFor="">Select Test</label><br />
-                  <select name="SelectTest" onChange={(e)=>{handleInput(e)}} className="outline-none border-[2px] rounded-md border-[#102C57] px-4 h-7 md:h-9 w-72">
-                    <option value={'A Test'}>A</option>
-                    <option value={'B Test'}>B</option>
-                    <option value={'C Test'}>C</option>
+                  <select name="SelectTest" value={input.SelectTest} onChange={(e)=>{handleInput(e)}} className="outline-none border-[2px] rounded-md border-[#102C57] px-4 h-7 md:h-9 w-72">
+                    {
+                      testList?.map((item,index) => {
+                        return(
+                          <option key={index} value={`${item._id}`}>{item.TestName}</option>
+                        )
+                      })
+                    }
+                    
+                    {/* <option value={'B Test'}>B</option>
+                    <option value={'C Test'}>C</option> */}
                   </select>
                 </div>
 
@@ -67,7 +122,7 @@ const Model = ( {setIsOpen, item} ) => {
                   <input type="date" name="ReportDate" value={input.ReportDate} onChange={(e)=>{handleInput(e)}} className=" outline-none border-[2px] rounded-md border-[#102C57] px-4 h-7 md:py-4 w-72" />
                 </div> 
 
-                <button className=" m-5 w-28 items-center border-[2px] border-[#102C57] rounded-lg px-5 py-2 hover:text-white hover:bg-[#102C57]" type="submit">Submit</button>
+                <button onClick={handleSubmit} className=" m-5 w-28 items-center border-[2px] border-[#102C57] rounded-lg px-5 py-2 hover:text-white hover:bg-[#102C57]" type="submit">Submit</button>
                 
               </form>
             </div>

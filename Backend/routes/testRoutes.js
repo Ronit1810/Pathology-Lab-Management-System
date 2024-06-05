@@ -9,4 +9,4 @@ route.get('/get',controllers.getTest)
 route.get('/get/:id',controllers.getTestById)
 
 
-module.exports = {route}
+module.exports = route

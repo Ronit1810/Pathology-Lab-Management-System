@@ -1,6 +1,7 @@
 // import React from 'react'
 
-import { useState } from "react"
+import axios from "axios"
+import { useEffect, useState } from "react"
 import { Link, useParams } from "react-router-dom"
 
 const Report = () => {
@@ -9,6 +10,25 @@ const Report = () => {
     const {id} = useParams()
 
     const[inputField, setInputField] = useState([{"id":0, "name":"", "range":"", "unit":"", "result":""}])
+    const[patientData, setPatientData] = useState(null)
+    const[testData, setTestData] = useState(null)
+
+
+    const fetchLoadData = async () => {
+        try {
+            const response = await axios.get(`http://localhost:8080/patient/${id}/testdetail`)
+            console.log(response);
+            setPatientData(response.data.patient)
+            setTestData(response.data.test)
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    useEffect(() => {
+        fetchLoadData()
+    },[])
+    console.log(testData);
 
     /* below function store the input data in 'inputField' */
     const onChnageInput = (e,index) => {
@@ -42,6 +62,18 @@ const Report = () => {
             setInputField(inputField.slice(0,-1))
         }
     }
+
+
+    const handleReport = async () => {
+        try {
+            const response = await axios.put(`http://localhost:8080/patient/${patientData._id}`,{
+                ...patientData,result:inputField,status:'completed'
+            })
+            console.log(response);
+        } catch (error) {
+            console.log(error);
+        }
+    }
     
 
   return (
@@ -51,14 +83,14 @@ const Report = () => {
 
             {/* name of patient and doctor */}
             <div className=" flex flex-col md:flex-row justify-between md:px-12 py-4">
-                <div className=" text-base font-medium text-[#102C57]">Name : Ronit Patel</div>
-                <div className=" text-base font-medium text-[#102C57]">Examined By : Dr.R.B.Patel</div>
+                <div className=" text-base font-medium text-[#102C57]">Name : {patientData?.Name}</div>
+                <div className=" text-base font-medium text-[#102C57]">Examined By : {patientData?.ExaminedBy}</div>
             </div>
 
 
             {/* name of the test selected while creating new */}
             <div className=" md:px-12 md:py-4">
-                <h1 className=" text-2xl font-bold text-[#102C57]">Blood Test</h1>
+                <h1 className=" text-2xl font-bold text-[#102C57]">{testData?.TestName}</h1>
             </div>
 
 
@@ -98,7 +130,7 @@ const Report = () => {
                     inputField.length > 1 ? <div onClick={RemoveRow} className=" border-[2px] border-[#102C57] px-4 py-1 rounded-2xl mt-4 cursor-pointer hover:bg-[#102C57] hover:text-white">Remove</div> : null
                 }
 
-                <Link to={`/prescription/${id}`} className=" border-[2px] border-[#102C57] px-4 py-1 rounded-2xl mt-4 cursor-pointer hover:bg-[#102C57] hover:text-white">Report</Link>
+                <Link onClick={handleReport} to={`/prescription/${id}`} className=" border-[2px] border-[#102C57] px-4 py-1 rounded-2xl mt-4 cursor-pointer hover:bg-[#102C57] hover:text-white">Report</Link>
             </div>
             
         </div>
