@@ -121,11 +121,11 @@ const Prescription = () => {
             <div className=' flex justify-between'>
                 <div>
                     <h1 className=' text-sm font-medium text-gray-500 '>Examined By</h1>
-                    <p className=' text-xs font-normal text-[#102c57e5]'>Radhika</p>
+                    <p className=' text-xs font-normal text-[#102c57e5]'>{patientDetail?.ExaminedBy}</p>
                 </div>
                 <div>
                     <h1 className=' text-sm font-medium text-gray-500 '>Report Date</h1>
-                    <p className=' text-xs font-normal text-[#102c57e5]'>14-05-2024</p>
+                    <p className=' text-xs font-normal text-[#102c57e5]'>{patientDetail?.ReportDate}</p>
                 </div>
             </div>
 
