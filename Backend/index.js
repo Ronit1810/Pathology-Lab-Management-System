@@ -33,12 +33,9 @@ const PORT = process.env.PORT || 8000;
 
 
 //API
-// app.get('/',(req,res)=>{
-//     res.json({
-//         "name":"ronit",
-//         "age":"22"
-//     })
-// })
+app.get('/', (req, res) => {
+    res.send("<h1>hello</h1>");
+})
 
 
 
