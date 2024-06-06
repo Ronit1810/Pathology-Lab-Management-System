@@ -14,7 +14,7 @@ const Model = ( {setIsOpen, item} ) => {
   console.log(item);
   const handleOption = async () => {
     try {
-      const response = await axios.get('http://localhost:8080/test/get');
+      const response = await axios.get('https://pathology-lab-management-system-backend.vercel.app/test/get');
       const data = response.data.testData;
       setTestList(data)
       if (!item) {
@@ -42,7 +42,7 @@ const Model = ( {setIsOpen, item} ) => {
   const handleSubmit = async() => {
     if (!item) {
       try {
-        const response = await axios.post('http://localhost:8080/patient/post',input)
+        const response = await axios.post('https://pathology-lab-management-system-backend.vercel.app/patient/post',input)
         console.log(response);
         window.location.reload()
       } catch (error) {
@@ -51,7 +51,7 @@ const Model = ( {setIsOpen, item} ) => {
       }
     } else {
       try {
-        const response = await axios.put(`http://localhost:8080/patient/${item._id}`,input)
+        const response = await axios.put(`https://pathology-lab-management-system-backend.vercel.app/patient/${item._id}`,input)
         console.log(response);
         window.location.reload()
       } catch (error) {

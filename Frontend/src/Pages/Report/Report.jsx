@@ -16,7 +16,7 @@ const Report = () => {
 
     const fetchLoadData = async () => {
         try {
-            const response = await axios.get(`http://localhost:8080/patient/${id}/testdetail`)
+            const response = await axios.get(`https://pathology-lab-management-system-backend.vercel.app/patient/${id}/testdetail`)
             console.log(response);
             setPatientData(response.data.patient)
             setTestData(response.data.test)
@@ -66,7 +66,7 @@ const Report = () => {
 
     const handleReport = async () => {
         try {
-            const response = await axios.put(`http://localhost:8080/patient/${patientData._id}`,{
+            const response = await axios.put(`https://pathology-lab-management-system-backend.vercel.app/patient/${patientData._id}`,{
                 ...patientData,result:inputField,status:'completed'
             })
             console.log(response);

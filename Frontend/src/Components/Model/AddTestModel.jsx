@@ -16,7 +16,7 @@ const AddTestModel = ({setTestMenu}) => {
 
   const handleSubmit = async () => {
     try {
-      const response = await axios.post('http://localhost:8080/test/post',testInput)
+      const response = await axios.post('https://pathology-lab-management-system-backend.vercel.app/test/post',testInput)
       console.log(response);
       window.location.reload()
     } catch (error) {

@@ -14,7 +14,7 @@ const Prescription = () => {
 
     const loadPatient = async () => {
         try {
-            const response = await axios.get(`http://localhost:8080/patient/get/${id}`)
+            const response = await axios.get(`https://pathology-lab-management-system-backend.vercel.app/patient/get/${id}`)
             console.log(response);
             setPatientDetail(response.data.data)
             console.log(patientDetail);

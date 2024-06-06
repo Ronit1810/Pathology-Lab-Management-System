@@ -26,7 +26,7 @@ function StatusPage() {
 
   const pendingData = async () => {
     try {
-      const response = await axios.get(`http://localhost:8080/patient/status/${activeStatus}`)
+      const response = await axios.get(`https://pathology-lab-management-system-backend.vercel.app/patient/status/${activeStatus}`)
       // console.log(response);
       setData(response.data.data)
     } catch (error) {
@@ -40,7 +40,7 @@ function StatusPage() {
 
   const DeletePatient = async (id) => {
     try {
-      const response = await axios.delete(`http://localhost:8080/patient/${id}`)
+      const response = await axios.delete(`https://pathology-lab-management-system-backend.vercel.app/patient/${id}`)
       console.log(response);
       window.location.reload()
     } catch (error) {

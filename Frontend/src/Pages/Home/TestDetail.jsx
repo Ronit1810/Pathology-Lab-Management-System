@@ -9,7 +9,7 @@ function TestDetail() {
   
   const getTestDetail = async () => {
     try {
-      const response = await axios.get('http://localhost:8080/test/get');
+      const response = await axios.get('https://pathology-lab-management-system-backend.vercel.app/test/get');
       const data = response.data.testData;
       setTestList(data);
       setSelectedDetail(data[0]);
