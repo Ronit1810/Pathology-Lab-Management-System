@@ -41,7 +41,7 @@ function TestDetail() {
   return (
     <div >
         <h1 className=" pb-5 md:pb-10 text-2xl md:text-5xl font-bold">Available Test</h1>
-        <div className=" overflow-auto h-52 flex-wrap items-center flex justify-center gap-8">
+        <div className=" overflow-visible h-52 flex-wrap items-center flex justify-center gap-8">
         {
           testList?.map((item,index) => {
             return(
